@@ -9,6 +9,11 @@ public class Member {
 		this.password = password;
 		this.email = email;
 	}
+	public Member(String email, String password) {
+		super();
+		this.password = password;
+		this.email = email;
+	}
 
 	public String getUname() {
 		return uname;

@@ -37,9 +37,33 @@ public class UserModel {
 			e.printStackTrace();
 			result = "data not entered";
 			
-		}
-		
-		
+		}	
 		return result;
-}
+	}
+	public String loginUser(Member member) {
+		String sql="hello";
+		try (Connection con = JDBCConnection.getJDBCConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, member.getEmail());
+            ps.setString(2, member.getPassword());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+		return null;
+	}
+	private void printSQLException(SQLException ex) {
+        for (Throwable e: ex) {
+            if (e instanceof SQLException) {
+                e.printStackTrace(System.err);
+                System.err.println("SQLState: " + ((SQLException) e).getSQLState());
+                System.err.println("Error Code: " + ((SQLException) e).getErrorCode());
+                System.err.println("Message: " + e.getMessage());
+                Throwable t = ex.getCause();
+                while (t != null) {
+                    System.out.println("Cause: " + t);
+                    t = t.getCause();
+                }
+            }
+        }
+    }
 }
