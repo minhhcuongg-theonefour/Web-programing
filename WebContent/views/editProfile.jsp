@@ -17,17 +17,10 @@
             <jsp:include page="topNavigation.jsp" />
             <!-- Page content-->
             <div class="container-fluid">
-				     <h1 class="mt-4">Home Page</h1>
-
-                <div class="card mb-4">
-                    <div class="card-header">Home Page</div>
-                    
-                    </div>
-                </div>   
+				
+ 					
             </div>
- 
-            </div>
-    </div>
+    	</div>
     </div>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
