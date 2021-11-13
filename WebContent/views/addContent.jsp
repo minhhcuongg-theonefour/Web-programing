@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/home.css">
-<title>Insert title here</title>
+<title>Add Content</title>
 </head>
 <body>
 	<div class="d-flex" id="wrapper">
@@ -22,7 +22,7 @@
                     <div class="card-header">Enter Content Elements</div>
                     <div class="card-body">
                        <h5> <labe for="Title ">Title </label></h5> 
-                        <input type="text" name="Title" placeholder=" Enter the title ">
+                        <input type="text" size="161px" name="Title" placeholder=" Enter the title ">
                       <div class="row">
                         <div class="col-25">
                         <h5> <label for="Brief">Brief</label></h5>

@@ -34,9 +34,6 @@ public class HomeController extends HttpServlet {
         case "/view-content":
             viewContentPage(request, response);
             break;
-        case "/user-profile":
-            userProfile(request, response);
-            break;
         case "/add-content":
             addContent(request, response);
             break;
@@ -56,11 +53,6 @@ public class HomeController extends HttpServlet {
     }
     private void viewContentPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/viewContent.jsp");
-    	dispatcher.forward(request, response);
-    	
-    }
-    private void userProfile(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/userProfile.jsp");
     	dispatcher.forward(request, response);
     	
     }

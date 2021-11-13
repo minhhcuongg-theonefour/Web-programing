@@ -16,13 +16,13 @@
             <span>Please Sign In</span>
           </div>
           <!-- sign in form -->
-          <form class="sign-in-form" action="user/sign-in" method="post">
+          <form class="sign-in-form" action="view-content" method="get">
             <div class="row element-form mt-3">
               <div class="child-element mb-3">
-                <input type="email" class="form-control edit-focus-input" placeholder="E-mail" name="email">
+                <input type="email" class="form-control edit-focus-input" placeholder="E-mail" name="email" minLength="5" maxLength="50" required>
               </div>
               <div class="child-element mb-2">
-                <input type="password" class="form-control edit-focus-input" placeholder="Password" name="password">
+                <input type="password" class="form-control edit-focus-input" placeholder="Password" name="password" minLength="8" maxLength="30" required>
               </div>
             </div>
             <div class="remember-btn">
@@ -41,24 +41,25 @@
             </div>
           </form>
           <!-- register form -->
-          <form class="register-form hidden" action="user/register" method="post">
+          <form class="register-form hidden" onsubmit="return checkConfirm();" action="user/register" method="post">
             <div class="row element-form mt-2">
               <div class="child-element mb-3">
-                <input type="text" class="form-control edit-focus-input" placeholder="User name" name="username" >
+                <input type="text" class="form-control edit-focus-input" placeholder="User name" name="username" minLength="3" maxLength="30" required>
               </div>
               <div class="child-element mb-3">
-                <input type="email" class="form-control edit-focus-input" placeholder="E-mail" name="email">
+                <input type="email" class="form-control edit-focus-input" placeholder="E-mail" name="email" minLength="5" required>
               </div>
               <div class="child-element mb-3">
-                <input type="password" class="form-control edit-focus-input" placeholder="Password" name="password">
+                <input type="password" class="form-control edit-focus-input" id="register-pass" placeholder="Password" name="password" minLength="8" maxLength="30" required>
               </div>
               <div class="child-element mb-3">
-                <input type="password" class="form-control edit-focus-input" placeholder="Re Password">
+                <input type="password" class="form-control edit-focus-input" id="confirm-register-pass" placeholder="Re Password" minLength="8" maxLength="30" required>
               </div>
             </div>
             <div class="d-grid gap-2">
               <button type="submit" class="btn btn-success mb-3 btn-submit-form">Register</button>
             </div>
+            <p id="output-error" style="color:red;"></p>
             <div class="row mb-3">
               <a href="void:()" class="switch-register-form">Click here to Login</a>
             </div>
@@ -67,6 +68,19 @@
       </div>
       
     </div>
+    <!-- JavaScript -->
+<script type="text/javascript">
+function checkConfirm(){
+	const pass_register = document.getElementById("register-pass");
+	const confirm_pass_register = document.getElementById("confirm-register-pass");
+	const output_error = document.getElementById("output-error");
+	if(pass_register.value === confirm_pass_register.value){
+		return true;
+	}
+	output_error.innerHTML = "password not match";
+	return false;
+}
+</script>
   <script src="js/login.js"></script>
 </body>
 </html>

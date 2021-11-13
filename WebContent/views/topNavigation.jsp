@@ -10,8 +10,8 @@
                          data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
                              class="fa fa-user" aria-hidden="true"></i></a>
                      <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                         <a class="dropdown-item" href="user-profile"><i class="fa fa-user" aria-hidden="true"></i>User Profile</a>
-                         <a class="dropdown-item" href="#!"><i class="fa fa-sign-in" aria-hidden="true"></i>Logout</a>
+                         <a class="dropdown-item" href="edit-profile"><i class="fa fa-user" aria-hidden="true"></i>User Profile</a>
+                         <a class="dropdown-item" href=""><i class="fa fa-sign-in" aria-hidden="true"></i>Logout</a>
                      </div>
                  </li>
              </ul>

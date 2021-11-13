@@ -16,3 +16,5 @@ btn_switch_register.addEventListener('click',()=>{
   register_form.classList.add('hidden');
 
 })
+
+
