@@ -8,6 +8,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class RegisterController
@@ -40,6 +41,12 @@ public class HomeController extends HttpServlet {
         case "/edit-profile":
             editProfile(request, response);
             break;
+        case "/admin":
+            adminPage(request, response);
+            break;
+        case "/logout":
+            logoutPage(request, response);
+            break;
         default:
             notFound(request, response);
             break;
@@ -66,8 +73,18 @@ public class HomeController extends HttpServlet {
     	dispatcher.forward(request, response);
     	
     }
+    private void adminPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/adminPage.jsp");
+    	dispatcher.forward(request, response);
+    }
+    private void logoutPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	HttpSession session = request.getSession();
+    	session.invalidate();
+    	response.sendRedirect(request.getContextPath());
+    }
     private void notFound(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
-    	response.sendRedirect("/");
+    	System.out.print("erorrrr");
+    	response.sendRedirect(request.getContextPath());
 	}
     
 }

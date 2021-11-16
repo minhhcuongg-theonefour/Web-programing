@@ -61,7 +61,7 @@
                       <textarea name = "Brief" placeholder=" " 
 
                           style="height:100px"></textarea>
-                   	 				
+                   	 	/>			
                     </p>
                         <div class="col-25">
                         <input type="Submit" value="Submit Button"  />
