@@ -143,12 +143,14 @@ $(document).ready(function(){
     processingEmail($(this).val().trim(), $(this));
     removeInvalidForm($("#output_error_form_login").find('.alert-success'));
     removeInvalidForm($("#output_error_form_login").find('.alert-danger'));
+	$(".submit-form").prop("disabled", false);
   })
   $('#password_login').change(function(){
     removeInvalidForm($(this).parent().find(".invalid-check-form"));
     removeInvalidForm($(this).parent().find(".valid-check-form"));
     processingPassword($(this).val(), $(this));
     removeInvalidForm($("#output_error_form_login").find('.alert-danger'));
+	$(".submit-form").prop("disabled", false);
   })
 
   $('#email_register').change(function(){
@@ -156,23 +158,27 @@ $(document).ready(function(){
     removeInvalidForm($(this).parent().find(".valid-check-form"));
     processingEmail($(this).val().trim(), $(this));
     removeOutputErrorForm();
+	$(".submit-register").prop('disabled', false);
   })
   
   $('#password_register').change(function(){
     removeInvalidForm($(this).parent().find(".invalid-check-form"));
     removeInvalidForm($(this).parent().find(".valid-check-form"));
     processingPassword($(this).val(), $(this));
+	$(".submit-register").prop('disabled', false);
   })
   $('#confirm_password_register').change(function(){
     removeInvalidForm($(this).parent().find(".invalid-check-form"));
     removeInvalidForm($(this).parent().find(".valid-check-form"));
     processingPassword($(this).val(), $(this));
     removeOutputErrorForm();
+	$(".submit-register").prop('disabled', false);
   })
   $('#username_register').change(function(){
     removeInvalidForm($(this).parent().find(".invalid-check-form"));
     removeInvalidForm($(this).parent().find(".valid-check-form"));
     processingUsername($(this).val().trim(), $(this));
+	$(".submit-register").prop('disabled', false);
   })
 
   // processing submit form
@@ -180,13 +186,13 @@ $(document).ready(function(){
     event.preventDefault();
     $(".submit-register").prop('disabled', true);
 	let flag = true;
-  let output_error = $("#output_error_form");
+  	let output_error = $("#output_error_form");
 	let username= $('#username_register');
 	let password = $('#password_register');
 	let confirm_password = $('#confirm_password_register');
 	let email = $('#email_register');
 	if(!outputEmpty(username, "Please enter value")){
-		flag = false;		
+		flag = false;
 	}
 	if(!outputEmpty(password, "Please enter value")){
 		flag = false;
@@ -290,7 +296,7 @@ $(document).ready(function(){
         })
       .done(function(msg){
         if(msg == "admin"){
-          window.location.replace("admin");
+          window.location.replace("admin/home");
         }
         if(msg == "user"){
           window.location.replace("home");

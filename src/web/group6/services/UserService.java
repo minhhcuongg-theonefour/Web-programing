@@ -31,7 +31,6 @@ public class UserService {
 		String pass = userModel.getPasswordByEmail(member.getEmail());
 		member.setPassword(Utilities.getMd5(member.getPassword()));
 		if(pass.equals(member.getPassword())) {
-			
 			user = userModel.getRoleByEmail(member.getEmail());
 			return user;
 		}else {

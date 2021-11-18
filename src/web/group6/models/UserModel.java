@@ -9,10 +9,10 @@ import web.group6.connection.JDBCConnection;
 import web.group6.helpers.Member;
 
 public class UserModel {
-	private static final String INSERT_USERS_SQL = "INSERT INTO Users(username, email, pass)"+ "VALUES(?,?,?)";
-	private static final String CHECK_EMAIL_EXIST = "SELECT email FROM dbo.Users WHERE email = ?;";
-	private static final String GET_PASSWORD_BY_EMAIL="SELECT pass FROM dbo.Users WHERE email = ?;";
-	private static final String GET_ROLE_BY_EMAIL = "SELECT id,roles,username,roles FROM dbo.Users WHERE email=?;";
+	private static final String INSERT_USERS_SQL = "INSERT INTO Member(Username, Email, Password)"+ "VALUES(?,?,?)";
+	private static final String CHECK_EMAIL_EXIST = "SELECT Email FROM dbo.Member WHERE Email = ?;";
+	private static final String GET_PASSWORD_BY_EMAIL="SELECT Password FROM dbo.Member WHERE Email = ?;";
+	private static final String GET_ROLE_BY_EMAIL = "SELECT id,Roles,Username,Roles FROM dbo.Member WHERE Email=?;";
 	public UserModel() {}
 	
 	public void insertUser(Member member) throws SQLException {	
@@ -31,7 +31,7 @@ public class UserModel {
 			ps.setString(1, email);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
-				pass = rs.getString("pass");
+				pass = rs.getString("Password");
 			}
 		}catch(SQLException e) {
 			printSQLException(e);
@@ -44,7 +44,7 @@ public class UserModel {
 			ps.setString(1, email);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
-				if(rs.getString("email").length() > 0) {
+				if(rs.getString("Email").length() > 0) {
 					status = true;
 				}
 			}
@@ -60,8 +60,8 @@ public class UserModel {
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
 				int userId = rs.getInt("id");
-				String username = rs.getString("username");
-				int role = rs.getInt("roles");
+				String username = rs.getString("Username");
+				int role = rs.getInt("Roles");
 				member = new Member(userId, username, email, role);
 			}
 		}catch(SQLException e) {

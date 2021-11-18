@@ -17,7 +17,7 @@
 					System.out.print("erorrrrr");	
 %>
 <script>
-	window.location.replace("admin");
+	window.location.replace("admin/home");
 </script>
 <% 
 		}else{

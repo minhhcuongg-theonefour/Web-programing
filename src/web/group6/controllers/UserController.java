@@ -12,8 +12,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import web.group6.helpers.Content;
 import web.group6.helpers.Member;
 import web.group6.helpers.Utilities;
+import web.group6.services.SearchService;
 import web.group6.services.UserService;
 
 /**
@@ -140,6 +142,7 @@ public class UserController extends HttpServlet {
 			}			
 		}
 	}
+	
 	private void notFound(HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("death");
 	}

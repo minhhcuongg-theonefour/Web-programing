@@ -1,6 +1,8 @@
 package web.group6.controllers;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -9,11 +11,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import web.group6.helpers.Content;
+import web.group6.services.SearchService;
 
-/**
- * Servlet implementation class RegisterController
- */
-@WebServlet(name="UserController",urlPatterns= {"/"})
+
+@WebServlet(name="HomeController",urlPatterns= {"/"})
 public class HomeController extends HttpServlet {
 
 	 /**
@@ -47,14 +49,25 @@ public class HomeController extends HttpServlet {
         case "/logout":
             logoutPage(request, response);
             break;
+        case "/search":
+			try {
+				searchContent(request, response);
+			} catch (SQLException | IOException | ServletException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            break;
         default:
             notFound(request, response);
             break;
     	}
     	
     }
+    
     private void homePage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	
     	RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/homePage.jsp");
+    	
     	dispatcher.forward(request, response);
     	
     }
@@ -87,4 +100,44 @@ public class HomeController extends HttpServlet {
     	response.sendRedirect(request.getContextPath());
 	}
     
+    private void searchContent(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException ,ServletException {
+		response.setContentType("text/html;charset=UTF-8");
+		try {
+			HttpSession session=request.getSession(false); 
+			int userId = (int) session.getAttribute("userId");
+			
+			int index = Integer.parseInt(request.getParameter("index"));
+			String txtSearch = request.getParameter("txtSearch");
+			
+			SearchService searchService = new SearchService();
+			
+			int count = searchService.resultCount(userId, txtSearch);
+			int pageSize = 3;
+			int endPage	= 0;
+			
+			endPage = count / pageSize;
+			if(count % pageSize != 0) {
+				endPage++;
+			}
+			if(count == 0) {
+				request.setAttribute("endPage", endPage);
+			}else {
+				List<Content> listSearch = searchService.search(userId, txtSearch, index);
+				request.setAttribute("endPage", endPage);
+				request.setAttribute("listSearch", listSearch);
+				request.setAttribute("save",txtSearch);
+				
+				for(Content content : listSearch) {
+					System.out.println("");
+					System.out.println(content.getContent());
+				}
+				
+				
+		        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/searchContent.jsp");
+		        dispatcher.forward(request, response);
+			}			
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+	}
 }

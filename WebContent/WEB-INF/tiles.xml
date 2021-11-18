@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+	<definition name="common" template="/layout/layout.jsp">
+		<put-attribute name="title" value="index" />
+		<put-attribute name="header" value="/layout/header.jsp" />
+		<put-attribute name="menu" value="/layout/menu.jsp" />
+		<put-attribute name="body" value="" />
+	</definition>
+	<definition name="view-content" extends="common">
+		<put-attribute name="title" value="View Content" />
+		<put-attribute name="body" value="/body/viewContent.jsp" />
+	</definition>
+	<definition name="add-content" extends="common">
+		<put-attribute name="title" value="Add Content" />
+		<put-attribute name="body" value="/body/addContent.jsp" />
+	</definition>
+	<definition name="admin" extends="common">
+		<put-attribute name="title" value="Admin Page" />
+		<put-attribute name="body" value="/body/admin.jsp" />
+	</definition>
+	<definition name="edit-profile" extends="common">
+		<put-attribute name="title" value="Edit Profile" />
+		<put-attribute name="body" value="/body/editProfile.jsp" />
+	</definition>
+</tiles-definitions>

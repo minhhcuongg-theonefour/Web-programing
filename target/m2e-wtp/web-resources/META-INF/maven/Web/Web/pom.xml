@@ -24,15 +24,34 @@
     </plugins>
   </build>
   <dependencies>
+  	<!-- https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/jstl -->
+		<dependency>
+		  <groupId>jstl</groupId>
+		  <artifactId>jstl</artifactId>
+		  <version>1.2</version>
+		  <scope>compile</scope>
+		</dependency>
+		<dependency>
+		  <groupId>taglibs</groupId>
+		  <artifactId>standard</artifactId>
+		  <version>1.1.2</version>
+		  <scope>compile</scope>
+		</dependency>
+  
   	<dependency>
 	    <groupId>com.microsoft.sqlserver</groupId>
 	    <artifactId>mssql-jdbc</artifactId>
 	     <version>8.2.1.jre11</version>
 	</dependency>
+	
+	
+	
 	<dependency>
-	    <groupId>jstl</groupId>
-	    <artifactId>jstl</artifactId>
-	    <version>1.2</version>
-</dependency>
+		<groupId>org.apache.tiles</groupId>
+		<artifactId>tiles-extras</artifactId>
+		<version>3.0.8</version>
+	</dependency>
+	
+	
   </dependencies>
 </project>
