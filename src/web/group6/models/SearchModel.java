@@ -4,17 +4,20 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import web.group6.connection.JDBCConnection;
 import web.group6.helpers.Content;
 import web.group6.helpers.Member;
+import web.group6.helpers.Utilities;
 
 public class SearchModel {
 	private static final String GET_SEARCH_RESULT_COUNT = "SELECT COUNT(*) FROM dbo.Content WHERE authorID=? AND Title LIKE ?";
 	private static final String GET_SEARCH_RESULT_BY_PAGING = "WITH x AS(SELECT ROW_NUMBER() OVER (ORDER BY CreatedDate DESC) AS number, * FROM dbo.Content WHERE authorID=? AND Title LIKE ? )"
-			+ "SELECT * FROM x WHERE number BETWEEN ?*3-2 AND ?*3 ";
+			+ "SELECT * FROM x WHERE number BETWEEN ?*10-9 AND ?*9 ";
 	
 	public SearchModel() {}
 	
@@ -42,12 +45,19 @@ public class SearchModel {
 			List<Content> list = new ArrayList<>();
 			
 			while(rs.next()) {
-				Content content = new Content(rs.getInt("authorID"),
+				Content content = new Content(
+							rs.getInt("authorID"),
 							rs.getInt("id"),
 							rs.getString("Title"),
 							rs.getString("Brief"),
-							rs.getString("Content")
+							rs.getString("Content"),
+							Utilities.convertDate(rs.getDate("CreatedDate"),rs.getDate("CreatedDate").getTime())
 						);
+//				System.out.println("---");
+//				String patternTime = "dd/MM/yyyy HH:mm";
+//				DateFormat tf = new SimpleDateFormat(patternTime);
+//				String targetDate = tf.format(rs.Time("CreateDate"));
+//				System.out.println(targetDate);
 				list.add(content);
 			}
 			return list;

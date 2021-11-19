@@ -3,6 +3,9 @@ package web.group6.helpers;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -51,5 +54,14 @@ public class Utilities {
         cookie.setPath(request.getContextPath());
         response.addCookie(cookie);
         
+    }
+	public static String convertDate(Date date, long time) {
+		String patternDate = "dd/MM/yyyy";
+		String patternTime = "HH:mm";
+		DateFormat df = new SimpleDateFormat(patternDate);
+		DateFormat tf = new SimpleDateFormat(patternTime);
+		String targetDate = df.format(date); 
+		String targetTime = tf.format(time); 
+		return targetDate+" "+targetTime;
     }
 }

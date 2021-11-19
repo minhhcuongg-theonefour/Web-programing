@@ -34,22 +34,23 @@
                 <thead>
                   <tr>
                     <th width="50">ID</th>
-                    <th width="400">AuthorId</th>
-                    <th width="400">Title</th>
-                    <th>Brief</th>
-                    <th width="200">Content</th>
+                    <th width="100">AuthorId</th>
+                    <th width="200">Title</th>
+                    <th width="250">Brief</th>
+                    <th width="300">Content</th>
+                    <th width="100">Created Date</th>
                     <th width="150">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                 <c:forEach items="${listSearch}" var="content">
                 	<tr>
-                    <td>${content.id}</td>
+                    <td>${content.contentId}</td>
                     <td>${content.authorID}</td>
                     <td>${content.title }</td>
                     <td>${content.brief }</td>
-                    <td>${content.brief }</td>
                     <td>${content.content }</td>
+                    <td>${content.getDate()}</td>
                     <td> 
                       <button class="btn btn-primary" id="button-edit" type="button">
               <i class="fa fa-edit" aria-hidden="true"></i> </button>
@@ -66,7 +67,7 @@
                 <li class="page-item">
                   <a class="page-link" href="#">Previous</a>
                 </li>
-                <c:forEach begin="i" end="${endPage }" var="i">
+                <c:forEach begin="1" end="${endPage }" var="i">
                 	<li class="page-item">
                 		<a class="page-link" href="search?index=${i}&txtSearch=${save}">
                 			${i}

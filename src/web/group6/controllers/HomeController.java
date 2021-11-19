@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+import config.App;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -112,11 +113,10 @@ public class HomeController extends HttpServlet {
 			SearchService searchService = new SearchService();
 			
 			int count = searchService.resultCount(userId, txtSearch);
-			int pageSize = 3;
 			int endPage	= 0;
 			
-			endPage = count / pageSize;
-			if(count % pageSize != 0) {
+			endPage = count / App.pageSize;
+			if(count % App.pageSize != 0) {
 				endPage++;
 			}
 			if(count == 0) {
@@ -126,11 +126,6 @@ public class HomeController extends HttpServlet {
 				request.setAttribute("endPage", endPage);
 				request.setAttribute("listSearch", listSearch);
 				request.setAttribute("save",txtSearch);
-				
-				for(Content content : listSearch) {
-					System.out.println("");
-					System.out.println(content.getContent());
-				}
 				
 				
 		        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/searchContent.jsp");
