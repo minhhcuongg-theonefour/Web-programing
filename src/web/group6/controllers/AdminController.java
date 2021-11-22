@@ -1,13 +1,18 @@
 package web.group6.controllers;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
 
+import config.App;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import web.group6.helpers.Content;
+import web.group6.services.SearchService;
 
 
 
@@ -37,10 +42,18 @@ public class AdminController extends HttpServlet {
 		    case "/logout":
 				logoutPage(request, response);
 				break;
+		    case "/search":
+		    	try {
+					searchAdmin(request, response);
+				} catch (IOException | ServletException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	            break;
 		    default:
 		        notFound(request, response);
 		        break;
-		}	
+		}
 	}
 	private void homeAdmin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/adminPage.jsp");
@@ -53,6 +66,40 @@ public class AdminController extends HttpServlet {
     	HttpSession session = request.getSession();
     	session.invalidate();
     	response.sendRedirect(request.getContextPath());
+    }
+	private void searchAdmin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session=request.getSession(false); 
+		int adminId = (int) session.getAttribute("userId");
+		int role = (int) session.getAttribute("role");
+		
+		if(role == 1) {
+			int index = Integer.parseInt(request.getParameter("index"));
+			String txtSearch = request.getParameter("txtSearch");
+			
+			SearchService searchService = new SearchService();
+			int count = searchService.resultCount(adminId, txtSearch, role);
+			int endPage	= 0;
+			
+			endPage = count / App.pageSize;
+			if(count % App.pageSize != 0) {
+				endPage++;
+			}
+			if(count == 0) {
+				request.setAttribute("endPage", endPage);
+			}else {
+				List<Content> listSearch = searchService.search(adminId, txtSearch, index, role);
+				request.setAttribute("endPage", endPage);
+				request.setAttribute("listSearch", listSearch);
+				request.setAttribute("save",txtSearch);
+				request.setAttribute("page",index);
+				
+		        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/searchContent.jsp");
+		        dispatcher.forward(request, response);
+			}
+			
+		}else {
+			response.sendRedirect(request.getContextPath());
+		}
     }
 
 }

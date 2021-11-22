@@ -10,21 +10,21 @@ import web.group6.models.SearchModel;
 public class SearchService {
 	public SearchService() {}
 	
-	public List<Content> search (int userId, String txtSearch, int index){
+	public List<Content> search (int userId, String txtSearch, int index, int role){
 		SearchModel searchModel = new SearchModel();
 		List<Content> list = new ArrayList<>();
-		list = searchModel.search(userId, txtSearch, index);
+		list = searchModel.search(userId, txtSearch, index, role);
 		if(list == null) {
 			return null;
 		}
 		return list;
 	}
 	
-	public int resultCount (int userId, String txtSearch){
+	public int resultCount (int userId, String txtSearch, int role){
 		int count = 0;
 		SearchModel searchModel = new SearchModel();
 		try {
-			count = searchModel.resultCount(userId, txtSearch);
+			count = searchModel.resultCount(userId, txtSearch, role);
 			return count;			
 		}catch(SQLException e) {
 			System.out.print(e);
