@@ -16,13 +16,16 @@ import web.group6.helpers.Utilities;
 
 public class SearchModel {
 	private static final String GET_SEARCH_RESULT_COUNT = "SELECT COUNT(*) FROM dbo.Content WHERE authorID=? AND Title LIKE ?";
+	private static final String GET_SEARCH_RESULT_COUNT_ADMIN = "SELECT COUNT(*) FROM dbo.Content WHERE authorID!=? AND Title LIKE ?";
 	private static final String GET_SEARCH_RESULT_BY_PAGING = "WITH x AS(SELECT ROW_NUMBER() OVER (ORDER BY CreatedDate DESC) AS number, * FROM dbo.Content WHERE authorID=? AND Title LIKE ? )"
-			+ "SELECT * FROM x WHERE number BETWEEN ?*10-9 AND ?*9 ";
-	
+			+ "SELECT authorID, id,Title, Brief,Content, DATENAME(hh, CreatedDate) AS Hour,DATENAME(n, CreatedDate) AS Minute, CreatedDate FROM x WHERE number BETWEEN ?*10-9 AND ?*10 ORDER BY CreatedDate DESC";
+	private static final String GET_SEARCH_RESULT_BY_PAGING_ADMIN = "WITH x AS(SELECT ROW_NUMBER() OVER (ORDER BY CreatedDate DESC) AS number, * FROM dbo.Content WHERE authorID!=? AND Title LIKE ? )"
+			+ "SELECT authorID, id,Title, Brief,Content, DATENAME(hh, CreatedDate) AS Hour,DATENAME(n, CreatedDate) AS Minute, CreatedDate FROM x WHERE number BETWEEN ?*10-9 AND ?*10 ORDER BY CreatedDate DESC";
 	public SearchModel() {}
 	
-	public int resultCount(int userId, String txtSearch) throws SQLException {	
-		try(Connection con = JDBCConnection.getJDBCConnection(); PreparedStatement ps = con.prepareStatement(GET_SEARCH_RESULT_COUNT)){
+	public int resultCount(int userId, String txtSearch, int role) throws SQLException {	
+		String SQL_COUNT = role == 1 ? GET_SEARCH_RESULT_COUNT_ADMIN : GET_SEARCH_RESULT_COUNT;
+		try(Connection con = JDBCConnection.getJDBCConnection(); PreparedStatement ps = con.prepareStatement(SQL_COUNT)){
 			ps.setInt(1, userId);
 			ps.setString(2,"%"+txtSearch+"%");
 			ResultSet rs = ps.executeQuery();
@@ -35,8 +38,9 @@ public class SearchModel {
 		return 0;
 	}
 	
-	public List<Content> search(int userId, String txtSearch, int index){
-		try(Connection con = JDBCConnection.getJDBCConnection(); PreparedStatement ps = con.prepareStatement(GET_SEARCH_RESULT_BY_PAGING)){
+	public List<Content> search(int userId, String txtSearch, int index, int role){
+		String SQL_SEARCH = role == 1 ? GET_SEARCH_RESULT_BY_PAGING_ADMIN : GET_SEARCH_RESULT_BY_PAGING;
+		try(Connection con = JDBCConnection.getJDBCConnection(); PreparedStatement ps = con.prepareStatement(SQL_SEARCH)){
 			ps.setInt(1, userId);
 			ps.setString(2,"%"+txtSearch+"%");
 			ps.setInt(3, index);
@@ -51,13 +55,8 @@ public class SearchModel {
 							rs.getString("Title"),
 							rs.getString("Brief"),
 							rs.getString("Content"),
-							Utilities.convertDate(rs.getDate("CreatedDate"),rs.getDate("CreatedDate").getTime())
+							Utilities.convertDate(rs.getDate("CreatedDate"),rs.getString("Hour"),rs.getString("Minute"))
 						);
-//				System.out.println("---");
-//				String patternTime = "dd/MM/yyyy HH:mm";
-//				DateFormat tf = new SimpleDateFormat(patternTime);
-//				String targetDate = tf.format(rs.Time("CreateDate"));
-//				System.out.println(targetDate);
 				list.add(content);
 			}
 			return list;

@@ -106,13 +106,13 @@ public class HomeController extends HttpServlet {
 		try {
 			HttpSession session=request.getSession(false); 
 			int userId = (int) session.getAttribute("userId");
-			
+			int role = (int) session.getAttribute("role");
 			int index = Integer.parseInt(request.getParameter("index"));
 			String txtSearch = request.getParameter("txtSearch");
 			
 			SearchService searchService = new SearchService();
 			
-			int count = searchService.resultCount(userId, txtSearch);
+			int count = searchService.resultCount(userId, txtSearch, role);
 			int endPage	= 0;
 			
 			endPage = count / App.pageSize;
@@ -122,11 +122,11 @@ public class HomeController extends HttpServlet {
 			if(count == 0) {
 				request.setAttribute("endPage", endPage);
 			}else {
-				List<Content> listSearch = searchService.search(userId, txtSearch, index);
+				List<Content> listSearch = searchService.search(userId, txtSearch, index, role);
 				request.setAttribute("endPage", endPage);
 				request.setAttribute("listSearch", listSearch);
 				request.setAttribute("save",txtSearch);
-				
+				request.setAttribute("page",index);
 				
 		        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/searchContent.jsp");
 		        dispatcher.forward(request, response);

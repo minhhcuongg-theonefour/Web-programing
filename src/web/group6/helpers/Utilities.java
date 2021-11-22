@@ -55,13 +55,19 @@ public class Utilities {
         response.addCookie(cookie);
         
     }
-	public static String convertDate(Date date, long time) {
+	public static String convertDate(Date date, String hour, String minute) {
 		String patternDate = "dd/MM/yyyy";
-		String patternTime = "HH:mm";
 		DateFormat df = new SimpleDateFormat(patternDate);
-		DateFormat tf = new SimpleDateFormat(patternTime);
-		String targetDate = df.format(date); 
-		String targetTime = tf.format(time); 
-		return targetDate+" "+targetTime;
+		String targetDate = df.format(date);
+		String timeTmp =minute;
+		String hourTmp = hour;
+		if(Integer.parseInt(minute) <= 10) {
+			timeTmp ="0"+ minute;
+		}
+		if(Integer.parseInt(hour) <= 10) {
+			hourTmp ="0"+hour;
+		}
+		return targetDate+" "+hourTmp+":"+timeTmp;
+		
     }
 }
