@@ -37,7 +37,18 @@ public class AdminController extends HttpServlet {
 		String action = request.getPathInfo();
 		switch (action) {
 		    case "/home":
-				homeAdmin(request, response);
+				try {
+					homeAdmin(request, response);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				break;
+			case "/delete":
+				try {
+					deleteContent(request, response);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 				break;
 		    case "/logout":
 				logoutPage(request, response);
@@ -55,18 +66,36 @@ public class AdminController extends HttpServlet {
 		        break;
 		}
 	}
-	private void homeAdmin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/adminPage.jsp");
-    	dispatcher.forward(request, response);
+	private void homeAdmin(HttpServletRequest request, HttpServletResponse response) 
+			throws SQLException, IOException, ServletException {
+		int count = AdminContentModel.countContent();
+		int index = request.getParameter("index") != null ? Integer.parseInt(request.getParameter("index")) : 1;
+		int pageSize = 10;
+		int endPage = 0;
+		endPage = count/ pageSize;
+		if(count % pageSize != 0) {
+			endPage++;
+		}
+		List<AdminContent> listContent = AdminContentModel.pageList(index,pageSize);
+		request.setAttribute("end", endPage);
+		request.setAttribute("listContentS", listContent);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/adminPage.jsp");
+		dispatcher.forward(request, response);
 	}
-	private void notFound(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("death");
+	private void deleteContent(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
+		AdminContentModel.deleteContent(id);
+		response.sendRedirect("home");
 	}
 	private void logoutPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	HttpSession session = request.getSession();
     	session.invalidate();
     	response.sendRedirect(request.getContextPath());
     }
+	private void notFound(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("death");
+	}
 	private void searchAdmin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session=request.getSession(false); 
 		int adminId = (int) session.getAttribute("userId");
