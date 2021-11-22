@@ -11,7 +11,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import web.group6.helpers.AdminContent;
 import web.group6.helpers.Content;
+import web.group6.models.AdminContentModel;
 import web.group6.services.SearchService;
 
 

@@ -61,7 +61,7 @@
 										<td style="word-break: break-word;">${content.brief}</td>	
 										<td>${content.createdDate}</td>
 										<td>
-										<a href="delete?id=${content.contentId}" class="btn btn-primary" id="button-delete" type="button">
+										<a href="delete?id=${content.contentId}" class="btn btn-primary" style="background:#11ca3e;border-color:#11ca3e;" id="button-delete" type="button">
 										<i class="fa fa-trash" aria-hidden="true"></i></a>
 										</td>
 									</tr>
