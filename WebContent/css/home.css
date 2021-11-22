@@ -237,7 +237,7 @@ sup {
 
 a {
   color: #0d6efd;
-  text-decoration: none;
+  text-decoration: underline;
 }
 a:hover {
   color: #0a58ca;
@@ -2217,7 +2217,7 @@ progress {
   background-color: #fff;
   border-color: #86b7fe;
   outline: 0;
-  box-shadow: 0 0 0 0.1rem rgb(13 110 253 / 25%);
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
 }
 .form-control::-webkit-date-and-time-value {
   height: 1.5em;

@@ -7,15 +7,14 @@
 	<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 	<tiles:insertDefinition name="view-content" />
 --%>
-<jsp:include page="checkLogged.jsp" />
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-     <link rel="stylesheet" href="<c:url value="/css/home.css" />">
-     <link rel="stylesheet" href="<c:url value="/css/pagination.css" />">
+    <link rel="stylesheet" href="css/home.css">
 <title>View Content</title>
 </head>
 <body>
@@ -34,24 +33,28 @@
               <table class="table table-striped table-bordered">
                 <thead>
                   <tr>
-                    <th width="10">ID</th>
+                    <th width="50">ID</th>
+                    <th width="100">AuthorId</th>
                     <th width="200">Title</th>
                     <th width="250">Brief</th>
-                    <th width="30" id="edit-created-date">Created Date</th>
-                    <th width="50">Actions</th>
+                    <th width="300">Content</th>
+                    <th width="100">Created Date</th>
+                    <th width="150">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                 <c:forEach items="${listSearch}" var="content">
                 	<tr>
                     <td>${content.contentId}</td>
-                    <td style="word-break: break-word;">${content.title }</td>
-                    <td style="word-break: break-word;">${content.brief }</td>
+                    <td>${content.authorID}</td>
+                    <td>${content.title }</td>
+                    <td>${content.brief }</td>
+                    <td>${content.content }</td>
                     <td>${content.getDate()}</td>
                     <td> 
-                      <button class="btn btn-primary" style="background-color:#11ca3e;border:none;" id="button-edit" type="button">
+                      <button class="btn btn-primary" id="button-edit" type="button">
               <i class="fa fa-edit" aria-hidden="true"></i> </button>
-                       <button class="btn btn-primary" style="background-color:#11ca3e;border:none;" id="button-delete" type="button">
+                       <button class="btn btn-primary" id="button-delete" type="button">
               <i class="fa fa-trash" aria-hidden="true"></i>
             </button>
                     </td>
@@ -60,9 +63,20 @@
                 
                 </tbody>
               </table>
-              <div class="searching_pagination" data-endPage="${endPage}" data-page="${page}" data-txtSearch="${save}">
-    				<ul> <!--pages or li are comes from javascript --> </ul>
-  				</div>
+              <ul class="pagination">
+                <li class="page-item">
+                  <a class="page-link" href="#">Previous</a>
+                </li>
+                <c:forEach begin="1" end="${endPage }" var="i">
+                	<li class="page-item">
+                		<a class="page-link" href="search?index=${i}&txtSearch=${save}">
+                			${i}
+                		</a>
+                	</li>
+                </c:forEach>
+                  <a class="page-link" href="#">Next</a>
+                </li>
+              </ul>
             </div>
           </div>
  
@@ -72,8 +86,7 @@
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
-    <script src="<c:url value="/js/pagination.js" />"></script>
-    <script src="<c:url value="/js/admin.js" />"></script>
+    <script src="js/admin.js"></script>
 	
 </body>
 </html>

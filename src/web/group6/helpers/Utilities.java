@@ -58,16 +58,7 @@ public class Utilities {
 	public static String convertDate(Date date, String hour, String minute) {
 		String patternDate = "dd/MM/yyyy";
 		DateFormat df = new SimpleDateFormat(patternDate);
-		String targetDate = df.format(date);
-		String timeTmp =minute;
-		String hourTmp = hour;
-		if(Integer.parseInt(minute) <= 10) {
-			timeTmp ="0"+ minute;
-		}
-		if(Integer.parseInt(hour) <= 10) {
-			hourTmp ="0"+hour;
-		}
-		return targetDate+" "+hourTmp+":"+timeTmp;
-		
+		String targetDate = df.format(date); 		 
+		return targetDate+" "+ hour+":"+minute;
     }
 }
