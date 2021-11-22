@@ -1,0 +1,111 @@
+@charset "ISO-8859-1";
+html, body{
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #f8f9fa;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.login-form{
+  justify-content: center;
+  margin-top: 10%;
+}
+.wrap-login-form{
+  background-color: #ffff;
+  border: 1px solid #aca8a8;
+  border-radius: 3px 3px 3px 3px;
+  box-shadow: 1px 1px #aca8a88a;
+}
+.row.title-form {
+  background-color: #e3e3e354;;
+  border-bottom: 1px solid #aca8a8;
+}
+.row.title-form span{
+  padding: 10px 14px;
+}
+.edit-focus-input:focus{
+  box-shadow: 0 0 0 0.15rem rgb(13 110 253 / 25%);
+}
+.check-box-form[type=checkbox] {
+  font-size: 12px;
+  background: #80808047;
+  margin-top: 7px;
+}
+.check-box-form[type=checkbox]:checked {
+  border-color: #aca8a88a;
+  background-color: #848687;
+}
+.check-box-form[type=checkbox]:focus {
+  border-color: #aca8a88a;
+  box-shadow: none;
+}
+a.switch-login-form, a.switch-register-form {
+  font-size: 13.5px;
+  text-decoration: none;
+  color: #0a58cadb;
+}
+.btn-submit-form{
+  background: #11ca3e;
+  border: 1px solid #848687;
+}
+.btn-submit-form:hover {
+  background: #05b330;
+}
+.hidden{
+  visibility: hidden;
+  opacity: 0;
+  width: 0px;
+  height: 0px;
+}
+.wrap-login-form{
+  width: 25%;
+}
+/* responsive */
+@media only screen and (max-width: 1320px) {
+  /* For desktop: */
+  .wrap-login-form{
+    width: 25%;
+  }
+}
+@media only screen and (max-width: 1140px) {
+  /* For desktop: */
+  .wrap-login-form{
+    width: 30%;
+  }
+}
+
+@media only screen and (max-width: 960px) {
+  /* For desktop: */
+  .wrap-login-form{
+    width: 35%;
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  /* For desktop: */
+  .wrap-login-form{
+    width: 40%;
+  }
+}
+
+@media only screen and (max-width: 540px) {
+  /* For desktop: */
+  .wrap-login-form{
+    width: 45%;
+  }
+}
+@media only screen and (max-width: 360px) {
+  /* For desktop: */
+  .wrap-login-form{
+    width: 50%;
+  }
+}
+.invalid-check-form {
+    display: block;
+    width: 100%;
+    margin-top: 0.25rem;
+    margin-left: 0.3rem;
+    font-size: .875em;
+    color: #dc3545;
+}
