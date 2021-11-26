@@ -2,18 +2,6 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
-<jsp:include page="checkLogged.jsp" />
-<%
-	int role = (int) session.getAttribute("role");
-	if(role != 1){
-%>
-<script>
-	window.location.replace("home");
-</script>
-<% 	
-	}
-%>
-
 <%--
 <tiles:insertDefinition name="admin" />
  --%>
@@ -29,6 +17,7 @@
 </head>
 <jsp:include page="checkLogged.jsp" />
 <body>
+<jsp:include page="checkLogged.jsp" />
 	<div class="d-flex" id="wrapper">
 		<jsp:include page="slidebar.jsp" />
 		<!-- Page content wrapper-->
@@ -85,6 +74,16 @@
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
 	<!-- Core theme JS-->
+	<%
+		int role = (int) session.getAttribute("role");
+		if(role != 1){
+	%>
+	<script>
+		window.location.replace("home");
+	</script>
+	<% 	
+		}
+	%>
 	<script src="../js/admin.js"></script>
 
 </body>

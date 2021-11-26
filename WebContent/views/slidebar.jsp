@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!-- Sidebar-->
-<%
-	int userId = (int) session.getAttribute("userId");	
-%>
   <div class="border-end bg-white" id="sidebar-wrapper">
       <div class="sidebar-heading border-bottom bg-light">CMS</div>
       <div class="card-body">

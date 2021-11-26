@@ -30,38 +30,40 @@ public class HomeController extends HttpServlet {
     	    throws ServletException, IOException {
     	String action = request.getServletPath();
     	
-    
     	switch (action) {
-        case "/home":
-            homePage(request, response);
-            break;
-        case "/view-content":
-            viewContentPage(request, response);
-            break;
-        case "/add-content":
-            addContent(request, response);
-            break;
-        case "/edit-profile":
-            editProfile(request, response);
-            break;
-        case "/admin":
-            adminPage(request, response);
-            break;
-        case "/logout":
-            logoutPage(request, response);
-            break;
-        case "/search":
-			try {
-				searchContent(request, response);
-			} catch (SQLException | IOException | ServletException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-            break;
-        default:
-            notFound(request, response);
-            break;
-    	}
+	        case "/home":
+	            homePage(request, response);
+	            break;
+	        case "/view-content":
+	            viewContentPage(request, response);
+	            break;
+	        case "/add-content":
+	            addContent(request, response);
+	            break;
+	        case "/edit-profile":
+	            editProfile(request, response);
+	            break;
+	        case "/logout":
+	            logoutPage(request, response);
+	            break;
+	        case "/search":
+				try {
+					searchContent(request, response);
+				} catch (SQLException | IOException | ServletException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	            break;
+	        case "/user":
+	        	notFound(request, response);
+	        	break;
+	        case "/admin":
+	        	notFound(request, response);
+	        	break;
+	        default:
+	            notFound(request, response);
+	            return;
+	    	}
     	
     }
     
@@ -87,18 +89,14 @@ public class HomeController extends HttpServlet {
     	dispatcher.forward(request, response);
     	
     }
-    private void adminPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/adminPage.jsp");
-    	dispatcher.forward(request, response);
-    }
     private void logoutPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	HttpSession session = request.getSession();
     	session.invalidate();
     	response.sendRedirect(request.getContextPath());
     }
     private void notFound(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
-    	System.out.print("erorrrr");
-    	response.sendRedirect(request.getContextPath());
+    	RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/notFound.jsp");
+    	dispatcher.forward(request, response);
 	}
     
     private void searchContent(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException ,ServletException {
@@ -127,7 +125,9 @@ public class HomeController extends HttpServlet {
 				request.setAttribute("listSearch", listSearch);
 				request.setAttribute("save",txtSearch);
 				request.setAttribute("page",index);
-				
+				for(Content content:listSearch) {
+					System.out.println(content.getTitle());
+				}
 		        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/searchContent.jsp");
 		        dispatcher.forward(request, response);
 			}			

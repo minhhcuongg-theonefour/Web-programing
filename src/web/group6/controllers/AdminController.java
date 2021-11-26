@@ -37,6 +37,7 @@ public class AdminController extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		String action = request.getPathInfo();
+		System.out.println(action);
 		switch (action) {
 		    case "/home":
 				try {
@@ -62,6 +63,9 @@ public class AdminController extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+	            break;
+		    case "/":
+		    	notFound(request, response);
 	            break;
 		    default:
 		        notFound(request, response);
@@ -95,8 +99,9 @@ public class AdminController extends HttpServlet {
     	session.invalidate();
     	response.sendRedirect(request.getContextPath());
     }
-	private void notFound(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("death");
+	private void notFound(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/notFound.jsp");
+    	dispatcher.forward(request, response);
 	}
 	private void searchAdmin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session=request.getSession(false); 

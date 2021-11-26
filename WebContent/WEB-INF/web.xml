@@ -12,7 +12,6 @@
    	<welcome-file>/views/login.jsp</welcome-file>
   </welcome-file-list>
 
-
 <!--
 <listener>
 		<listener-class>org.apache.tiles.extras.complete.CompleteAutoloadTilesListener</listener-class>

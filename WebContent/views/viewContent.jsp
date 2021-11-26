@@ -17,6 +17,7 @@
 <title>View Content</title>
 </head>
 <body>
+<jsp:include page="checkLogged.jsp" />
 	<div class="d-flex" id="wrapper">
         <jsp:include page="slidebar.jsp" />
         <!-- Page content wrapper-->
@@ -24,8 +25,8 @@
             <jsp:include page="topNavigation.jsp" />
             <!-- Page content-->
             <div class="container-fluid">
-				    <h1 class="mt-4">View Content</h1>
-
+            <jsp:include page="loading.jsp" />
+		<h1 class="mt-4">View Content</h1>
           <div class="card mb-4">
             <div class="card-header">View Content list</div>
             <div class="card-body">
@@ -182,6 +183,7 @@
     </div>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/loader.js"></script>
     <!-- Core theme JS-->
     <script src="js/admin.js"></script>
 	
