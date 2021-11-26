@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
-	
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>	
 
 <%--
 	<tiles:insertDefinition name="view-content" />
@@ -18,7 +18,8 @@
 </head>
 <body>
 <jsp:include page="checkLogged.jsp" />
-	<div class="d-flex" id="wrapper">
+	
+    <div class="d-flex" id="wrapper">
         <jsp:include page="slidebar.jsp" />
         <!-- Page content wrapper-->
         <div id="page-content-wrapper">
@@ -26,7 +27,8 @@
             <!-- Page content-->
             <div class="container-fluid">
             <jsp:include page="loading.jsp" />
-		<h1 class="mt-4">View Content</h1>
+				    <h1 class="mt-4">View Content</h1>
+
           <div class="card mb-4">
             <div class="card-header">View Content list</div>
             <div class="card-body">
@@ -36,133 +38,30 @@
                     <th width="50">#</th>
                     <th width="400">Title</th>
                     <th>Brief</th>
-                    <th width="200">Created Day</th>
+                    <th width="200">Created Date</th>
                     <th width="150">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td> 
-                      <button class="btn btn-primary" id="button-edit" type="button">
-              <i class="fa fa-edit" aria-hidden="true"></i> </button>
-                       <button class="btn btn-primary" id="button-delete" type="button">
-              <i class="fa fa-trash" aria-hidden="true"></i>
-            </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                    <button class="btn btn-primary" id="button-edit" type="button">
-              <i class="fa fa-edit" aria-hidden="true"></i> </button>
-                       <button class="btn btn-primary" id="button-delete" type="button">
-              <i class="fa fa-trash" aria-hidden="true"></i>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                    <button class="btn btn-primary" id="button-edit" type="button">
-              <i class="fa fa-edit" aria-hidden="true"></i> </button>
-                       <button class="btn btn-primary" id="button-delete" type="button">
-              <i class="fa fa-trash" aria-hidden="true"></i>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                    <button class="btn btn-primary" id="button-edit" type="button">
-              <i class="fa fa-edit" aria-hidden="true"></i> </button>
-                       <button class="btn btn-primary" id="button-delete" type="button">
-              <i class="fa fa-trash" aria-hidden="true"></i>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>5</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                    <button class="btn btn-primary" id="button-edit" type="button">
-              <i class="fa fa-edit" aria-hidden="true"></i> </button>
-                       <button class="btn btn-primary" id="button-delete" type="button">
-              <i class="fa fa-trash" aria-hidden="true"></i>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>6</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                    <button class="btn btn-primary" id="button-edit" type="button">
-              <i class="fa fa-edit" aria-hidden="true"></i> </button>
-                       <button class="btn btn-primary" id="button-delete" type="button">
-              <i class="fa fa-trash" aria-hidden="true"></i>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>7</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                    <button class="btn btn-primary" id="button-edit" type="button">
-              <i class="fa fa-edit" aria-hidden="true"></i> </button>
-                       <button class="btn btn-primary" id="button-delete" type="button">
-              <i class="fa fa-trash" aria-hidden="true"></i>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>8</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                    <button class="btn btn-primary" id="button-edit" type="button">
-              <i class="fa fa-edit" aria-hidden="true"></i> </button>
-                       <button class="btn btn-primary" id="button-delete" type="button">
-              <i class="fa fa-trash" aria-hidden="true"></i>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>9</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                    <button class="btn btn-primary" id="button-edit" type="button">
-              <i class="fa fa-edit" aria-hidden="true"></i> </button>
-                       <button class="btn btn-primary" id="button-delete" type="button">
-              <i class="fa fa-trash" aria-hidden="true"></i>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>10</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                    <button class="btn btn-primary" id="button-edit" type="button">
-              <i class="fa fa-edit" aria-hidden="true"></i> </button>
-                       <button class="btn btn-primary" id="button-delete" type="button">
-              <i class="fa fa-trash" aria-hidden="true"></i>
-                    </td>
-                  </tr>
-                </tbody>
+                				<c:forEach items="${list}" var="content">
+                                <tr>
+                                    <td>
+                                        ${content.contentId} 
+                                    </td>
+                                    <td>
+                                        ${content.title}
+                                    </td>
+                                    <td>
+                                        ${content.brief}
+                                    </td>
+                                    <td>
+                                        ${content.getDate()} 
+                                    </td>
+                                    
+                                    <td><a href="edit-content?contentID=${content.contentId}">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="delete-content?contentId=${content.contentId}">Delete</a></td>
+                                </tr>
+                                </c:forEach>
+                        </tbody>
               </table>
               <ul class="pagination">
                 <li class="page-item">
