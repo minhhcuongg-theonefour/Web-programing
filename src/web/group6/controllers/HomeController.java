@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import web.group6.helpers.Content;
+import web.group6.models.ContentModel;
 import web.group6.services.SearchService;
 
 
@@ -40,6 +41,17 @@ public class HomeController extends HttpServlet {
 	        case "/add-content":
 	            addContent(request, response);
 	            break;
+	        case "/delete-content":
+	            try {
+					deleteContent(request, response);
+				} catch (ServletException | IOException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+	            break;
+	        case "/edit-content":
+	            	editContentPage(request, response);
+	            	break;
 	        case "/edit-profile":
 	            editProfile(request, response);
 	            break;
@@ -75,9 +87,41 @@ public class HomeController extends HttpServlet {
     	
     }
     private void viewContentPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/viewContent.jsp");
-    	dispatcher.forward(request, response);
+    	HttpSession session=request.getSession(false); 
+		int userId = (int) session.getAttribute("userId");
+		
+		
+		ContentModel contentModel = new ContentModel();
+        List < Content > listContent = contentModel.selectContentUser(userId);
+        request.setAttribute("list", listContent);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/viewContent.jsp");
+        dispatcher.forward(request, response);
     	
+    }
+    private void editContentPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	int contentId = Integer.parseInt(request.getParameter("contentID"));
+    	
+		ContentModel contentModel = new ContentModel();
+        Content  content = contentModel.selectContent(contentId);
+        System.out.println(content.getBrief());
+        request.setAttribute("content", content);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/editContent.jsp");
+        dispatcher.forward(request, response);
+    	
+    }
+    private void deleteContent(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+    	HttpSession session=request.getSession(false); 
+		int userId = (int) session.getAttribute("userId");
+		int contentId = Integer.parseInt(request.getParameter("contentId"));
+		ContentModel contentModel = new ContentModel();
+		if(contentModel.deleteContent(contentId)) {
+			List < Content > listContent = contentModel.selectContentUser(userId);
+	        request.setAttribute("list", listContent);
+	        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/viewContent.jsp");
+	        dispatcher.forward(request, response);
+		}else {
+			System.out.print("the error of SQL");
+		}    	
     }
     private void addContent(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/addContent.jsp");
